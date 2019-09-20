@@ -3,6 +3,7 @@ const maxProfit = function(input) {
   let maxProf = -1;
   if (input.length > 2) {
     // Divide
+    // While splitting using splice, theres is no need to look for the second half since input becomes the second half
     let fh = input.splice(0, Math.ceil(input.length / 2));
     let dif = Math.max(...input) - Math.min(...fh);
     // Update
