@@ -1,5 +1,19 @@
 const args = process.argv.slice(2);
 
+const getBottlesRecursively = function(bottles, remainingBottles, remainingCaps, availableBottles, availableCaps) {
+  bottles = Number(bottles);
+  availableBottles = availableBottles || 0, availableCaps = availableCaps || 0, remainingBottles = remainingBottles || bottles, remainingCaps = remainingCaps || bottles;
+  if (remainingBottles < 2 && remainingCaps < 4) return 1;
+  availableBottles += bottles;
+  availableCaps += bottles;
+  let nbottles = Math.floor(availableBottles / 2) + Math.floor(availableCaps / 4);
+  availableBottles = availableBottles % 2;
+  availableCaps = availableCaps % 4;
+  remainingBottles = nbottles + availableBottles;
+  remainingCaps = nbottles + availableCaps;
+  return bottles + getBottlesRecursively(nbottles, remainingBottles, remainingCaps, availableBottles, availableCaps);
+};
+
 const getBottles = function(bottles) {
   let originalBottles = bottles;
   bottles = Number(bottles);
@@ -18,3 +32,4 @@ const getBottles = function(bottles) {
 };
 
 console.log(getBottles(args));
+console.log('\nJust Finl Total Recursevely: ' + getBottlesRecursively(args) + '\n');
